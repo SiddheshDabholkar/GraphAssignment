@@ -1,0 +1,15 @@
+@import "/src/styles/mixin.scss";
+
+.DateGraph {
+  @include col;
+  @include center;
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+  &Cont {
+    text-align: center;
+    @include col;
+    @include center;
+    width: 95%;
+  }
+}

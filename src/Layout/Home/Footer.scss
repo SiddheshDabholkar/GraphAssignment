@@ -1,0 +1,10 @@
+@import "/src/styles/mixin.scss";
+@import "/src/styles/colors.scss";
+
+.Footer {
+  @include row;
+  @include center;
+  width: 100%;
+  background: $background;
+  height: 100px;
+}
