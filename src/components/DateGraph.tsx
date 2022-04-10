@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { ApiDataType } from "../pages/Home";
+import React from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,6 +11,7 @@ import {
 import { Chart, getElementAtEvent } from "react-chartjs-2";
 import "./DateGraph.scss";
 import DayGraph from "./DayGraph";
+import useConvertedData from "../hooks/useConvertedData";
 
 ChartJS.register(
   CategoryScale,
@@ -42,32 +42,10 @@ type DateGraphTypes = {
 };
 
 const DateGraph: React.FC<DateGraphTypes> = ({ date, data }) => {
+  const { converted, convertScheduledTimeIntoItemDateFormat } =
+    useConvertedData();
   const chartRef = React.useRef();
-  const [converted, setConverted] = React.useState<ApiDataType[]>([]);
   const [selectedDate, setSelectedDate] = React.useState("");
-
-  const convertScheduledTimeIntoItemDateFormat = (date: string) => {
-    const formatted = new Date(date);
-    const year = formatted.getFullYear();
-    const month = formatted.getMonth() + 1;
-    const day = formatted.getDate();
-    const formatMonth = month.toString().length !== 1 ? month : `0${month}`;
-    const formatDay = day.toString().length !== 1 ? day : `0${day}`;
-    return `${year}-${formatMonth}-${formatDay}`;
-  };
-
-  const convertAll = (data: ApiDataType[]) => {
-    return data.map((d) => {
-      return {
-        ...d,
-        schedule_time: convertScheduledTimeIntoItemDateFormat(d.schedule_time),
-      };
-    });
-  };
-
-  useEffect(() => {
-    setConverted(convertAll(data));
-  }, [data]);
 
   const getYesterday = (date: string) => {
     const yesterday = new Date(date);
