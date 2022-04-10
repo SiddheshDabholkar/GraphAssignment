@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ApiDataType } from "../App";
+import { ApiDataType } from "../pages/Home";
 import {
   Chart as ChartJS,
   CategoryScale,

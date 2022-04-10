@@ -1,0 +1,17 @@
+@import "/src/styles/mixin.scss";
+
+.Main {
+  @include col;
+  width: 100%;
+  height: auto;
+  &Top {
+    @include center;
+    @include row;
+    width: 100%;
+    margin: 2% 0;
+    &Style {
+      padding: 5px;
+      border-radius: 5px;
+    }
+  }
+}

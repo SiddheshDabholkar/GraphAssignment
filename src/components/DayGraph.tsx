@@ -1,7 +1,6 @@
 import React from "react";
 import "./DayGraph.scss";
-import { ApiDataType } from "../App";
-
+import { ApiDataType } from "../pages/Home";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Chart, getElementAtEvent } from "react-chartjs-2";
+import { Chart } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -89,11 +88,7 @@ const DayGraph: React.FC<DayGraphType> = ({ date, data }) => {
 
   return (
     <div>
-      <Chart
-        type="bar"
-        options={options}
-        data={graphdata}
-      />
+      <Chart type="bar" options={options} data={graphdata} />
     </div>
   );
 };
