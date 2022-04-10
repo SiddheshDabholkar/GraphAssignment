@@ -1,0 +1,21 @@
+@import "/src/styles/mixin.scss";
+
+.Bonus {
+  @include col;
+  @include center;
+  &Top {
+    @include row;
+    @include center;
+    width: 100%;
+    &Style {
+      padding: 8px;
+      border-radius: 10px;
+      margin: 20px;
+    }
+  }
+  &Bottom {
+    @include col;
+    @include center;
+    width: 90%;
+  }
+}
