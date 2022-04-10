@@ -25,7 +25,7 @@ export default function Bonus() {
         />
       </div>
       <div className="BonusBottom">
-        <PriorScheduling />
+        <PriorScheduling from={from} to={to} />
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import "./Home.scss";
 
 export type ApiDataType = {
   schedule_time: string;
-  slot: "L" | "D";
+  slot: string;
   item_date: string;
 };
 
