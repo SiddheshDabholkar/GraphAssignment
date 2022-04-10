@@ -80,7 +80,12 @@ const DateGraph: React.FC<DateGraphTypes> = ({ date, data }) => {
       });
     });
 
-    return generatedData;
+    const sum = generatedData.reduce((a, b) => a + b);
+    if (sum === 0) {
+      return [];
+    } else {
+      return generatedData;
+    }
   };
 
   const dataforGraph = generateDataForLabels(generateLabels(date));
@@ -112,21 +117,25 @@ const DateGraph: React.FC<DateGraphTypes> = ({ date, data }) => {
 
   return (
     <div className="DateGraph">
-      <div className="DateGraphCont">
-        <Bar
-          options={options}
-          data={graphdata}
-          ref={chartRef}
-          onClick={onClick}
-        />
-        {selectedDate ? (
-          <div className="DateGraphContDayGraph">
-            <DayGraph date={selectedDate} data={data} />
-          </div>
-        ) : (
-          <Error message="Tap on one of the above bar to see the schedules by time" />
-        )}
-      </div>
+      {dataforGraph.length !== 0 ? (
+        <div className="DateGraphCont">
+          <Bar
+            options={options}
+            data={graphdata}
+            ref={chartRef}
+            onClick={onClick}
+          />
+          {selectedDate ? (
+            <div className="DateGraphContDayGraph">
+              <DayGraph date={selectedDate} data={data} />
+            </div>
+          ) : (
+            <Error message="Tap on one of the above bar to see the schedules by time" />
+          )}
+        </div>
+      ) : (
+        <Error message="Could not find any data on this date" />
+      )}
     </div>
   );
 };
