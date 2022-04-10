@@ -7,11 +7,11 @@ import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <HomeLayout>
-      <BrowserRouter>
+    <BrowserRouter>
+      <HomeLayout>
         <App />
-      </BrowserRouter>
-    </HomeLayout>
+      </HomeLayout>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
