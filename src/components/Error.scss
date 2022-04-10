@@ -1,0 +1,14 @@
+@import "/src/styles/mixin.scss";
+
+.Error {
+  @include row;
+  @include center;
+  width: 90%;
+  border-radius: 10px;
+  background: pink;
+  &Message {
+    padding: 10px 0px;
+    color: red;
+    font-size: 15px;
+  }
+}

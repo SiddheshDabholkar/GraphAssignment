@@ -1,0 +1,8 @@
+@import "/src/styles/mixin.scss";
+
+.DayGraph {
+  @include col;
+  @include center;
+  width: 100%;
+  margin: 3% 0%;
+}

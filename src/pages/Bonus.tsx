@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Bonus.scss";
 import PriorScheduling from "../components/PriorScheduling";
+import Error from "../components/Error";
 
 export default function Bonus() {
   const [from, setForm] = useState("");
@@ -29,9 +30,7 @@ export default function Bonus() {
           <PriorScheduling from={from} to={to} />
         </div>
       ) : (
-        <div className="BonusNotSelected">
-          <h1>Please select dates from above input</h1>
-        </div>
+        <Error message="Please select dates from above input" />
       )}
     </div>
   );

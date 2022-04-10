@@ -8,10 +8,11 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Chart, getElementAtEvent } from "react-chartjs-2";
+import { Bar, getElementAtEvent } from "react-chartjs-2";
 import "./DateGraph.scss";
 import DayGraph from "./DayGraph";
 import useConvertedData from "../hooks/useConvertedData";
+import Error from "./Error";
 
 ChartJS.register(
   CategoryScale,
@@ -30,7 +31,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Chart.js Bar Chart",
+      text: "Items Scheduled on Each day",
     },
   },
 };
@@ -106,28 +107,25 @@ const DateGraph: React.FC<DateGraphTypes> = ({ date, data }) => {
     printElementAtEvent(getElementAtEvent(chart, event));
   };
 
-  if (date) {
-    return (
-      <div className="DateGraph">
-        <div className="DateGraphCont">
-          <Chart
-            type="bar"
-            options={options}
-            data={graphdata}
-            ref={chartRef}
-            onClick={onClick}
-          />
-          {selectedDate && <DayGraph date={selectedDate} data={data} />}
-        </div>
+  return (
+    <div className="DateGraph">
+      <div className="DateGraphCont">
+        <Bar
+          options={options}
+          data={graphdata}
+          ref={chartRef}
+          onClick={onClick}
+        />
+        {selectedDate ? (
+          <div className="DateGraphContDayGraph">
+            <DayGraph date={selectedDate} data={data} />
+          </div>
+        ) : (
+          <Error message="Tap on one of the above bar to see the chedules by time" />
+        )}
       </div>
-    );
-  } else {
-    return (
-      <div className="DateGraph">
-        <h1>Select date to see the graph</h1>
-      </div>
-    );
-  }
+    </div>
+  );
 };
 
 export default DateGraph;

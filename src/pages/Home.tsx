@@ -1,5 +1,6 @@
 import React from "react";
 import DateGraph from "../components/DateGraph";
+import Error from "../components/Error";
 import data from "../data.json";
 import "./Home.scss";
 
@@ -23,9 +24,13 @@ const Home: React.FC = () => {
             onChange={(e) => setDate(e.target.value)}
           />
         </div>
-        <div className="MainBottom">
-          <DateGraph date={date!} data={data} />
-        </div>
+        {date ? (
+          <div className="MainBottom">
+            <DateGraph date={date!} data={data} />
+          </div>
+        ) : (
+          <Error message="Select date to see the graph" />
+        )}
       </main>
     </>
   );

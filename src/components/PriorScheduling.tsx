@@ -3,6 +3,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import useConvertedData from "../hooks/useConvertedData";
 import "./PriorScheduling.scss";
+import Error from "./Error";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -51,12 +52,15 @@ const PriorScheduling: React.FC<PriorSchedulingType> = ({ from, to }) => {
   const generatePercentage = (nums: number[]) => {
     const percArray: any[] = [];
     const sum = nums.reduce((a, b) => a + b);
-    const n = nums.length;
     nums.map((m, i) => {
       let perc = ((m * 100) / sum).toFixed(2);
       percArray[i] = perc;
     });
-    return percArray;
+    if (sum === 0) {
+      return [];
+    } else {
+      return percArray;
+    }
   };
 
   const generateRandomColors = (length: number) => {
@@ -73,23 +77,29 @@ const PriorScheduling: React.FC<PriorSchedulingType> = ({ from, to }) => {
     return colors;
   };
 
+  const PercentageData = generatePercentage(generateDataForLabels(dates));
+
   const pieData = {
     labels: dates,
     datasets: [
       {
         label: "% of Schedules per day",
-        data: generatePercentage(generateDataForLabels(dates)),
+        data: PercentageData,
         backgroundColor: generateRandomColors(dates.length),
         borderWidth: 1,
       },
     ],
   };
 
-  return (
-    <div className="PriorScheduling">
-      <Pie data={pieData} />
-    </div>
-  );
+  if (PercentageData.length !== 0) {
+    return (
+      <div className="PriorScheduling">
+        <Pie data={pieData} />
+      </div>
+    );
+  } else {
+    return <Error message="No data found in this timeline" />;
+  }
 };
 
 export default PriorScheduling;

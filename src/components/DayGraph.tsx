@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Chart } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -35,7 +35,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Chart.js Bar Chart",
+      text: "No of Schedules in Time Section",
     },
   },
 };
@@ -53,14 +53,11 @@ const DayGraph: React.FC<DayGraphType> = ({ date, data }) => {
     let SixNine: number = 0;
     data.map((t) => {
       const timed = new Date(t.schedule_time).getHours();
-      console.log("times", timed);
       if (timed > 9 && timed < 12) {
         NineTweleve = NineTweleve + 1;
         timeDated[0] = NineTweleve;
       } else if (timed > 12 && timed < 15) {
-        console.log("TweleveThree", TweleveThree);
         TweleveThree = TweleveThree + 1;
-        console.log("TweleveThree", TweleveThree);
         timeDated[1] = TweleveThree;
       } else if (timed > 15 && timed < 18) {
         ThreeSix = ThreeSix + 1;
@@ -87,8 +84,8 @@ const DayGraph: React.FC<DayGraphType> = ({ date, data }) => {
   };
 
   return (
-    <div>
-      <Chart type="bar" options={options} data={graphdata} />
+    <div className="DayGraph">
+      <Bar options={options} data={graphdata} />
     </div>
   );
 };
