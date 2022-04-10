@@ -9,8 +9,9 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Chart, getElementAtEvent } from "react-chartjs-2";
 import "./DateGraph.scss";
+import DayGraph from "./DayGraph";
 
 ChartJS.register(
   CategoryScale,
@@ -41,7 +42,9 @@ type DateGraphTypes = {
 };
 
 const DateGraph: React.FC<DateGraphTypes> = ({ date, data }) => {
+  const chartRef = React.useRef();
   const [converted, setConverted] = React.useState<ApiDataType[]>([]);
+  const [selectedDate, setSelectedDate] = React.useState("");
 
   const convertScheduledTimeIntoItemDateFormat = (date: string) => {
     const formatted = new Date(date);
@@ -112,11 +115,31 @@ const DateGraph: React.FC<DateGraphTypes> = ({ date, data }) => {
     ],
   };
 
+  const onClick = (event: any) => {
+    const { current: chart } = chartRef;
+    if (!chart) {
+      return;
+    }
+    const printElementAtEvent = (element: any) => {
+      if (!element.length) return;
+      const { index } = element[0];
+      setSelectedDate(graphdata.labels[index]);
+    };
+    printElementAtEvent(getElementAtEvent(chart, event));
+  };
+
   if (date) {
     return (
       <div className="DateGraph">
         <div className="DateGraphCont">
-          <Bar options={options} data={graphdata} />
+          <Chart
+            type="bar"
+            options={options}
+            data={graphdata}
+            ref={chartRef}
+            onClick={onClick}
+          />
+          {selectedDate && <DayGraph date={selectedDate} data={data} />}
         </div>
       </div>
     );
