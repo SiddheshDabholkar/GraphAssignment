@@ -24,9 +24,15 @@ export default function Bonus() {
           onChange={(e) => setTo(e.target.value)}
         />
       </div>
-      <div className="BonusBottom">
-        <PriorScheduling from={from} to={to} />
-      </div>
+      {to && from ? (
+        <div className="BonusBottom">
+          <PriorScheduling from={from} to={to} />
+        </div>
+      ) : (
+        <div className="BonusNotSelected">
+          <h1>Please select dates from above input</h1>
+        </div>
+      )}
     </div>
   );
 }

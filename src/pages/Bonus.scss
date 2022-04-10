@@ -1,8 +1,11 @@
 @import "/src/styles/mixin.scss";
+@import "/src/styles/colors.scss";
 
 .Bonus {
   @include col;
   @include center;
+  min-height: 100vh;
+  max-height: 100%;
   &Top {
     @include row;
     @include center;
@@ -16,6 +19,27 @@
   &Bottom {
     @include col;
     @include center;
-    width: 90%;
+    margin: 3% 0%;
+    @media (min-width: 1000px) {
+      width: 40%;
+    }
+    @media (min-width: 1300px) {
+      width: 50%;
+    }
+    @media (max-width: 1000px) {
+      width: 90%;
+    }
+    @media (max-width: 900px) {
+      width: 100%;
+    }
+  }
+  &NotSelected {
+    @include row;
+    @include center;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bolder;
+    color: $background;
   }
 }

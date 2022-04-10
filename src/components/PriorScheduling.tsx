@@ -3,6 +3,7 @@ import data from "../data.json";
 import { ApiDataType } from "../pages/Home";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import "./PriorScheduling.scss";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -126,7 +127,7 @@ const PriorScheduling: React.FC<PriorSchedulingType> = ({ from, to }) => {
   };
 
   return (
-    <div>
+    <div className="PriorScheduling">
       <Pie data={pieData} />
     </div>
   );

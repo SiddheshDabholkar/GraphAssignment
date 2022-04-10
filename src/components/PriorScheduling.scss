@@ -1,0 +1,7 @@
+@import "/src/styles/mixin.scss";
+
+.PriorScheduling {
+  @include col;
+  @include center;
+  width: 95%;
+}
