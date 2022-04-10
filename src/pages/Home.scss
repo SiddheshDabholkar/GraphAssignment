@@ -2,7 +2,10 @@
 
 .Main {
   @include col;
+  @include center;
   width: 100%;
+  min-height: 100vh;
+  max-height: 100%;
   height: auto;
   &Top {
     @include center;
@@ -12,6 +15,19 @@
     &Style {
       padding: 5px;
       border-radius: 5px;
+    }
+  }
+  &Bottom {
+    margin-top: 2%;
+    width: 60%;
+    @media (max-width: 1000px) {
+      width: 80%;
+    }
+    @media (max-width: 800px) {
+      width: 85%;
+    }
+    @media (max-width: 600px) {
+      width: 95%;
     }
   }
 }

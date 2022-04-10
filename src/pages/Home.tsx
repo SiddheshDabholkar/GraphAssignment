@@ -23,7 +23,7 @@ const Home: React.FC = () => {
             onChange={(e) => setDate(e.target.value)}
           />
         </div>
-        <div>
+        <div className="MainBottom">
           <DateGraph date={date!} data={data} />
         </div>
       </main>
