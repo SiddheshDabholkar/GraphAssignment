@@ -89,7 +89,6 @@ const DateGraph: React.FC<DateGraphTypes> = ({ date, data }) => {
   };
 
   const dataforGraph = generateDataForLabels(generateLabels(date));
-  console.log("dataforGraph", dataforGraph);
 
   const graphdata = {
     labels: generateLabels(date),
