@@ -64,6 +64,7 @@ const PriorScheduling: React.FC<PriorSchedulingType> = ({ from, to }) => {
 
   //checks if scheduled time is same as above dates
 
+  //produces count of schedules on each day
   const generateDataForLabels = (data: string[]) => {
     const generatedData: number[] = Array(dates.length).fill(0);
 
@@ -80,7 +81,22 @@ const PriorScheduling: React.FC<PriorSchedulingType> = ({ from, to }) => {
 
     return generatedData;
   };
+  // produce %
+  const generatePercentage = (nums: number[]) => {
+    const percArray: any[] = [];
+    const sum = nums.reduce((a, b) => a + b);
+    const n = nums.length;
+    nums.map((m, i) => {
+      let perc = ((m * 100) / sum).toFixed(2);
+      percArray[i] = perc;
+    });
+    return percArray;
+  };
 
+  console.log(
+    "generatePercentage",
+    generatePercentage(generateDataForLabels(dates))
+  );
   console.log("generateDataForLabels", generateDataForLabels(dates));
 
   const generateRandomColors = (length: number) => {
@@ -102,7 +118,7 @@ const PriorScheduling: React.FC<PriorSchedulingType> = ({ from, to }) => {
     datasets: [
       {
         label: "% of Schedules per day",
-        data: generateDataForLabels(dates),
+        data: generatePercentage(generateDataForLabels(dates)),
         backgroundColor: generateRandomColors(dates.length),
         borderWidth: 1,
       },
