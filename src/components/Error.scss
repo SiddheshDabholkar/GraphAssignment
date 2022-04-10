@@ -6,6 +6,12 @@
   width: 90%;
   border-radius: 10px;
   background: pink;
+  @media (min-width: 1000px) {
+    width: 40%;
+  }
+  @media (min-width: 800px) {
+    width: 50%;
+  }
   &Message {
     padding: 10px 0px;
     color: red;

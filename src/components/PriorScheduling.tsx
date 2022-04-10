@@ -16,6 +16,19 @@ const PriorScheduling: React.FC<PriorSchedulingType> = ({ from, to }) => {
   const { converted, convertScheduledTimeIntoItemDateFormat: convert } =
     useConvertedData();
 
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top" as const,
+      },
+      title: {
+        display: true,
+        text: `Schedules between ${from} and ${to}`,
+      },
+    },
+  };
+
   const getDatesBetweenDates = (startDate: any, endDate: any) => {
     let dates: any[] = [];
     const sDate = new Date(startDate);
@@ -94,7 +107,7 @@ const PriorScheduling: React.FC<PriorSchedulingType> = ({ from, to }) => {
   if (PercentageData.length !== 0) {
     return (
       <div className="PriorScheduling">
-        <Pie data={pieData} />
+        <Pie data={pieData} options={options} />
       </div>
     );
   } else {

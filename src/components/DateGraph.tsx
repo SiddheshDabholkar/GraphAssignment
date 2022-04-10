@@ -83,12 +83,15 @@ const DateGraph: React.FC<DateGraphTypes> = ({ date, data }) => {
     return generatedData;
   };
 
+  const dataforGraph = generateDataForLabels(generateLabels(date));
+  console.log("dataforGraph", dataforGraph);
+
   const graphdata = {
     labels: generateLabels(date),
     datasets: [
       {
         label: "no of schedules",
-        data: generateDataForLabels(generateLabels(date)),
+        data: dataforGraph,
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
@@ -121,7 +124,7 @@ const DateGraph: React.FC<DateGraphTypes> = ({ date, data }) => {
             <DayGraph date={selectedDate} data={data} />
           </div>
         ) : (
-          <Error message="Tap on one of the above bar to see the chedules by time" />
+          <Error message="Tap on one of the above bar to see the schedules by time" />
         )}
       </div>
     </div>
